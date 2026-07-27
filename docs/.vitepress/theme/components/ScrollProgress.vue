@@ -29,7 +29,7 @@ defineProps<{ active: boolean }>()
   display: block;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, var(--vp-c-brand-1), #38bfa8, var(--vp-c-brand-2));
+  background: linear-gradient(90deg, var(--vp-c-brand-2), var(--vp-c-brand-1));
   transform: scaleX(0);
   transform-origin: left center;
   will-change: transform;

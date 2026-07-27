@@ -9,7 +9,7 @@ import { computed } from 'vue'
 import { useData } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import AmbientAurora from './components/AmbientAurora.vue'
-import HeroVisual from './components/HeroVisual.vue'
+import HomeHero from './components/HomeHero.vue'
 import ScrollProgress from './components/ScrollProgress.vue'
 import { usePageMotion } from './motion/usePageMotion'
 
@@ -27,10 +27,10 @@ usePageMotion()
       <ScrollProgress :active="showProgress" />
     </template>
     <template #home-hero-before>
-      <AmbientAurora v-if="isHome" />
-    </template>
-    <template #home-hero-image>
-      <HeroVisual v-if="isHome" />
+      <template v-if="isHome">
+        <AmbientAurora />
+        <HomeHero />
+      </template>
     </template>
   </Layout>
 </template>

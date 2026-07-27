@@ -6,9 +6,6 @@
  * the motion read as one system instead of a pile of separate effects, so
  * prefer adding a token over hard-coding a one-off value.
  *
- * The curves are the Fluent Design easings, the same ones the WinUI application
- * this site documents animates with.
- *
  * `styles/tokens.css` mirrors these values as CSS custom properties. The two
  * lists have to be edited together; nothing syncs them at build time.
  */
@@ -16,20 +13,20 @@
 /** Cubic-bezier control points, `[x1, y1, x2, y2]`. */
 type Bezier = readonly [number, number, number, number]
 
-/** GSAP ease names, registered by {@link registerFluentEases}. */
+/** GSAP ease names, registered by {@link registerSiteEases}. */
 export const EASE = {
-  /** Decelerate. Entrances: reveals, fades, rises. */
-  enter: 'fluentEnter',
+  /** Strong ease-out. Entrances: reveals, fades, rises. */
+  enter: 'siteEnter',
   /** Accelerate. Exits: fade-outs, the first half of a route change. */
-  exit: 'fluentExit',
+  exit: 'siteExit',
   /** Point to point: sliding indicators, pill selection. */
-  standard: 'fluentStandard',
+  standard: 'siteStandard',
 } as const
 
 const CURVES: Readonly<Record<string, Bezier>> = {
-  [EASE.enter]: [0.1, 0.9, 0.2, 1],
-  [EASE.exit]: [0.7, 0, 1, 0.5],
-  [EASE.standard]: [0.8, 0, 0.2, 1],
+  [EASE.enter]: [0.23, 1, 0.32, 1],
+  [EASE.exit]: [0.7, 0, 0.84, 0],
+  [EASE.standard]: [0.77, 0, 0.175, 1],
 }
 
 /** Seconds, GSAP's unit. `styles/tokens.css` carries the same values in ms. */
@@ -70,7 +67,7 @@ function toPath([x1, y1, x2, y2]: Bezier): string {
 let registered = false
 
 /** Idempotent: several callers may await the same {@link loadGsap} promise. */
-export function registerFluentEases(
+export function registerSiteEases(
   CustomEase: { create(name: string, data: string): unknown },
 ): void {
   if (registered) return

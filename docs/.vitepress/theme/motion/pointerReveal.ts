@@ -1,13 +1,14 @@
 const TARGETS = [
   '.capability-item',
   '.VPButton',
+  '.home-hero__action',
   '.docs-callout a',
   '.VPSidebarItem .item',
   '.VPNavBarMenuLink',
 ].join(',')
 
 /**
- * Installs one delegated pointer listener for Fluent surface reveal.
+ * Installs one delegated pointer listener for the surface reveal effect.
  * Coordinates are written relative to the hovered target and consumed by CSS.
  */
 export function setupPointerReveal(): () => void {

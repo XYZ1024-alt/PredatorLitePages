@@ -82,7 +82,13 @@ onUnmounted(() => {
   height: 820px;
   overflow: clip;
   pointer-events: none;
-  opacity: var(--mo-aurora-opacity);
+  /* Hairline engineering grid, faded out towards the content below. */
+  background-image:
+    linear-gradient(var(--mo-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--mo-grid-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 88%);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 88%);
   will-change: transform;
 }
 
@@ -93,33 +99,29 @@ onUnmounted(() => {
   will-change: transform;
 }
 
+/* Single accent, two depths of the same hue. */
 .ambient-aurora__field--one {
+  opacity: var(--mo-glow-opacity);
   background-image:
-    radial-gradient(ellipse 78% 58% at 14% 18%, var(--vp-c-brand-1), transparent 72%),
-    radial-gradient(ellipse 66% 52% at 86% 44%, #72d7c5, transparent 74%);
+    radial-gradient(ellipse 56% 46% at 78% 16%, var(--vp-c-brand-1), transparent 72%);
 }
 
 .ambient-aurora__field--two {
+  opacity: calc(var(--mo-glow-opacity) * 0.55);
   background-image:
-    radial-gradient(ellipse 70% 54% at 58% 4%, #7ea6ff, transparent 72%),
-    radial-gradient(ellipse 82% 48% at 38% 78%, var(--vp-c-brand-2), transparent 76%);
-  mix-blend-mode: multiply;
-}
-
-:global(.dark .ambient-aurora__field--two) {
-  mix-blend-mode: screen;
+    radial-gradient(ellipse 48% 40% at 12% 30%, var(--vp-c-brand-2), transparent 74%);
 }
 
 .ambient-aurora--compact {
   top: -45%;
   height: 190%;
-  opacity: calc(var(--mo-aurora-opacity) * 0.65);
 }
 
 @media (max-width: 767px) {
   .ambient-aurora {
     top: -80px;
     height: 660px;
+    background-size: 44px 44px;
   }
 }
 

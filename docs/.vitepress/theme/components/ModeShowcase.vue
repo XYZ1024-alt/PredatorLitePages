@@ -285,7 +285,6 @@ onUnmounted(() => {
   grid-template-rows: auto 1fr auto;
   gap: 18px 28px;
   overflow: hidden;
-  background: var(--vp-c-brand-soft);
 }
 
 .mode-showcase__copy {
@@ -304,9 +303,9 @@ onUnmounted(() => {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   min-height: 38px;
   padding: 3px;
-  border: 1px solid color-mix(in srgb, var(--vp-c-brand-1) 20%, var(--vp-c-divider));
-  border-radius: 7px;
-  background: color-mix(in srgb, var(--vp-c-bg-elv) 78%, transparent);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--mo-radius-small);
+  background: color-mix(in srgb, var(--vp-c-bg) 60%, transparent);
 }
 
 .mode-showcase__selector button {
@@ -314,7 +313,7 @@ onUnmounted(() => {
   z-index: 1;
   min-width: 0;
   border: 0;
-  border-radius: 5px;
+  border-radius: 4px;
   background: transparent;
   color: var(--vp-c-text-2);
   font: inherit;
@@ -325,7 +324,7 @@ onUnmounted(() => {
 }
 
 .mode-showcase__selector button[aria-checked="true"] {
-  color: var(--vp-button-brand-text);
+  color: var(--vp-c-text-1);
 }
 
 .mode-showcase__selector button:focus-visible {
@@ -348,9 +347,9 @@ onUnmounted(() => {
   display: block;
   width: 100%;
   height: 100%;
-  border-radius: 5px;
-  background: var(--vp-c-brand-1);
-  box-shadow: 0 2px 8px rgb(8 126 174 / 20%);
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--vp-c-text-1) 10%, transparent);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
 }
 
 .mode-showcase__graph {
@@ -380,7 +379,7 @@ onUnmounted(() => {
   stroke-width: 3;
   stroke-linecap: round;
   vector-effect: non-scaling-stroke;
-  filter: drop-shadow(0 5px 8px rgb(8 126 174 / 18%));
+  filter: drop-shadow(0 5px 8px color-mix(in srgb, var(--vp-c-brand-1) 20%, transparent));
 }
 
 .mode-showcase__caption {

@@ -7,6 +7,7 @@ import {
   animateHero,
   revealDocs,
   revealHome,
+  scrubWords,
   setupMagneticCta,
   setupScrollProgress,
 } from './reveal'
@@ -77,6 +78,7 @@ export function usePageMotion(): void {
         if (isHome) {
           animateHero(current, document)
           revealHome(current, document)
+          scrubWords(current, document)
           pageCleanups.push(setupMagneticCta(current, document))
         } else {
           revealDocs(current, document)

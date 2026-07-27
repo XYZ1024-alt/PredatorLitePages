@@ -27,9 +27,9 @@ hero:
 
 <!-- 将本节替换为 PredatorLite 的项目背景、目标用户和核心价值。 -->
 
-<div class="overview-points" data-reveal-group>
-  <p class="overview-lead">在这里用一段简洁的文字说明 PredatorLite 是什么，以及它最适合谁。</p>
-  <p class="overview-note">补充项目与其他方案的区别。只保留用户做决定时真正需要的信息。</p>
+<div class="overview-points">
+  <p class="overview-lead" data-scrub-words>PredatorLite 是一个轻量的 Predator 笔记本控制中心，把运行模式、散热、电源和灯光收进一个窗口，替代常驻后台的官方套件。</p>
+  <p class="overview-note" data-reveal>它适合想要快速切换模式、随时查看温度与电量，又不愿为一套臃肿的控制软件牺牲系统资源的用户。</p>
 </div>
 
 </section>
@@ -52,15 +52,15 @@ hero:
   />
   <article class="capability-item">
     <h3>散热与性能</h3>
-    <p>介绍风扇控制、温度信息和性能相关能力。</p>
+    <p>查看温度与风扇转速，按需要在安静和散热效率之间调整风扇策略。</p>
   </article>
   <article class="capability-item">
     <h3>电源管理</h3>
-    <p>说明充电上限、电池状态或其他与电源相关的功能。</p>
+    <p>设置充电上限，减少电池长期满电带来的损耗，并随时查看电池状态。</p>
   </article>
   <article class="capability-item">
     <h3>灯光与显示</h3>
-    <p>介绍亮度、灯效、刷新率和显卡连接方式等可配置项目。</p>
+    <p>在一屏内完成键盘灯效、屏幕亮度和刷新率等常用显示设置。</p>
   </article>
 </div>
 
@@ -75,19 +75,19 @@ hero:
 <div class="use-case-list" data-reveal-group>
   <article class="use-case" tabindex="0">
     <h3>日常使用</h3>
-    <p>描述用户在普通工作或娱乐环境下如何使用 PredatorLite。</p>
+    <p>办公和浏览时保持安静模式，风扇低转，专注不被噪音打断。</p>
   </article>
   <article class="use-case" tabindex="0">
     <h3>性能调节</h3>
-    <p>描述需要快速切换性能和散热策略时的典型流程。</p>
+    <p>开始游戏或渲染前切到性能模式，一次点击完成，不用翻多层设置。</p>
   </article>
   <article class="use-case" tabindex="0">
     <h3>设备状态</h3>
-    <p>描述查看温度、转速、电量等信息的价值。</p>
+    <p>出差途中随手查看温度、风扇转速和剩余电量，判断设备当前状态。</p>
   </article>
   <article class="use-case" tabindex="0">
     <h3>个性化设置</h3>
-    <p>描述用户可以调整并保存的设备体验。</p>
+    <p>按使用场景调整灯效和显示参数，保存后下次开机自动生效。</p>
   </article>
 </div>
 
@@ -96,7 +96,7 @@ hero:
 <section class="docs-callout" data-reveal>
   <div>
     <h2>从文档开始了解 PredatorLite</h2>
-    <p>安装要求、配置说明和常见问题都可以在文档区继续补充。</p>
+    <p>安装要求、配置说明和常见问题都在文档区，几分钟即可完成部署。</p>
   </div>
   <a href="./guide/">进入文档</a>
 </section>

@@ -173,10 +173,12 @@ export default defineConfig({
   lang: localeUI.root.lang,
   cleanUrls: true,
   lastUpdated: true,
+  // Dark is the flagship theme; the light variant stays fully designed.
+  appearance: 'dark',
   sitemap: { hostname: siteUrl },
   head: [
     ['link', { rel: 'icon', type: 'image/png', href: LOGO }],
-    ['meta', { name: 'theme-color', content: '#087eae' }],
+    ['meta', { name: 'theme-color', content: '#0b0e11' }],
     ['script', {}, PRE_PAINT_SCRIPT],
   ],
   markdown: {

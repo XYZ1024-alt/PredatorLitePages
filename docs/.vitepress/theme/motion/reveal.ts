@@ -33,12 +33,19 @@ function collectHomeBatches(root: ParentNode): RevealBatch[] {
 }
 
 export function revealHome({ gsap }: GsapBundle, root: ParentNode): void {
+  let firstGroup = true
   for (const { trigger, targets } of collectHomeBatches(root)) {
+    // The first block sits closest to the hero, so it enters a touch faster;
+    // later blocks keep the standard reveal pace. Same curve throughout, so
+    // the difference reads as hierarchy rather than as two animation systems.
+    const duration = firstGroup ? DUR.enter : DUR.reveal
+    firstGroup = false
+
     gsap.set(targets, { opacity: 0, y: TRAVEL.standard })
     gsap.to(targets, {
       opacity: 1,
       y: 0,
-      duration: DUR.reveal,
+      duration,
       ease: EASE.enter,
       stagger: STAGGER,
       clearProps: 'willChange',
@@ -74,14 +81,14 @@ export function revealDocs({ gsap, ScrollTrigger }: GsapBundle, root: ParentNode
 }
 
 export function animateHero({ gsap, SplitText }: GsapBundle, root: ParentNode): void {
-  const name = root.querySelector<HTMLElement>('.VPHero .name')
-  const text = root.querySelector<HTMLElement>('.VPHero .text')
-  const tagline = root.querySelector<HTMLElement>('.VPHero .tagline')
-  const actions = root.querySelector<HTMLElement>('.VPHero .actions')
-  const actionItems = root.querySelectorAll<HTMLElement>('.VPHero .action')
+  const name = root.querySelector<HTMLElement>('.home-hero__name')
+  const title = root.querySelector<HTMLElement>('.home-hero__title')
+  const tagline = root.querySelector<HTMLElement>('.home-hero__tagline')
+  const actions = root.querySelector<HTMLElement>('.home-hero__actions')
+  const actionItems = root.querySelectorAll<HTMLElement>('.home-hero__action')
   const visual = root.querySelector<HTMLElement>('.hero-visual')
   const shine = root.querySelector<HTMLElement>('.hero-visual__shine')
-  const headings = [name, text].filter((element): element is HTMLElement => Boolean(element))
+  const headings = [name, title].filter((element): element is HTMLElement => Boolean(element))
   const timeline = gsap.timeline({ defaults: { ease: EASE.enter } })
 
   let lines: Element[] = headings
@@ -152,8 +159,55 @@ export function animateHero({ gsap, SplitText }: GsapBundle, root: ParentNode): 
   }
 }
 
-export function setupScrollProgress({ gsap }: GsapBundle, root: ParentNode): void {
-  const bar = root.querySelector<HTMLElement>('.scroll-progress__bar')
+/**
+ * Scroll-scrubbed character reveal for `[data-scrub-words]` blocks.
+ *
+ * The pre-paint state hides the element itself; here it is set visible and the
+ * scrub owns the per-character opacity from there on. SplitText failure (CJK
+ * edge cases, future API changes) falls back to a plain whole-block fade.
+ */
+export function scrubWords({ gsap, SplitText }: GsapBundle, root: ParentNode): void {
+  const elements = root.querySelectorAll<HTMLElement>('[data-scrub-words]')
+
+  for (const element of elements) {
+    let units: Element[] = []
+    try {
+      const split = new SplitText(element, { type: 'words,chars' })
+      units = split.chars.length > 0 ? split.chars : split.words
+    } catch {
+      units = []
+    }
+
+    gsap.set(element, { opacity: 1, clearProps: 'willChange' })
+
+    if (units.length === 0) {
+      gsap.fromTo(
+        element,
+        { opacity: 0 },
+        { opacity: 1, duration: DUR.reveal, ease: EASE.enter },
+      )
+      continue
+    }
+
+    gsap.fromTo(
+      units,
+      { opacity: 0.12 },
+      {
+        opacity: 1,
+        ease: 'none',
+        stagger: 0.04,
+        scrollTrigger: {
+          trigger: element,
+          start: 'top 82%',
+          end: 'top 38%',
+          scrub: true,
+        },
+      },
+    )
+  }
+}
+
+export function setupScrollProgress({ gsap }: GsapBundle, root: ParentNode): void {  const bar = root.querySelector<HTMLElement>('.scroll-progress__bar')
   if (!bar) return
 
   gsap.fromTo(

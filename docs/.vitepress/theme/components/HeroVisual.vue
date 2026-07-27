@@ -69,14 +69,25 @@ onUnmounted(() => {
 
 <style scoped>
 .hero-visual {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: min(100%, 360px);
+  position: relative;
+  width: min(100%, 340px);
   aspect-ratio: 45 / 64;
-  transform: translate(-50%, -50%);
+  margin-inline: auto;
   perspective: 1000px;
   will-change: opacity, transform;
+}
+
+/* Accent halo behind the frame; intensity is a design token. */
+.hero-visual::before {
+  position: absolute;
+  inset: -12% -18%;
+  background: radial-gradient(
+    ellipse 62% 54% at 50% 46%,
+    color-mix(in srgb, var(--vp-c-brand-1) calc(var(--mo-glow-opacity) * 100%), transparent),
+    transparent 72%
+  );
+  content: "";
+  pointer-events: none;
 }
 
 .hero-visual__frame {
@@ -84,10 +95,10 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  border: 1px solid rgb(255 255 255 / 14%);
-  border-radius: 8px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: var(--mo-radius-card);
   background: var(--vp-c-bg-elv);
-  box-shadow: 0 24px 64px rgb(25 33 38 / 18%);
+  box-shadow: var(--mo-surface-shadow-lift);
   transform-origin: center;
   will-change: transform;
 }
@@ -103,19 +114,8 @@ onUnmounted(() => {
   position: absolute;
   inset: -35% -70%;
   pointer-events: none;
-  background: linear-gradient(112deg, transparent 38%, rgb(255 255 255 / 0.32) 50%, transparent 62%);
+  background: linear-gradient(112deg, transparent 38%, rgb(255 255 255 / 0.28) 50%, transparent 62%);
   transform: translateX(-65%);
-}
-
-:global(.dark .hero-visual__frame) {
-  border-color: rgb(255 255 255 / 9%);
-  box-shadow: 0 28px 72px rgb(0 0 0 / 38%);
-}
-
-@media (min-width: 960px) {
-  .hero-visual {
-    top: calc(50% + 64px);
-  }
 }
 
 @media (max-width: 959px) {
@@ -126,7 +126,7 @@ onUnmounted(() => {
 
 @media (max-width: 767px) {
   .hero-visual {
-    width: 170px;
+    width: 190px;
   }
 }
 
@@ -136,10 +136,6 @@ onUnmounted(() => {
   .hero-visual__shine {
     transform: none !important;
     will-change: auto;
-  }
-
-  .hero-visual {
-    transform: translate(-50%, -50%) !important;
   }
 }
 </style>

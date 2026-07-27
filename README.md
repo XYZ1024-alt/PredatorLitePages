@@ -49,12 +49,18 @@ npm run preview
 
 站点使用 `gsap`、`ScrollTrigger`、`SplitText` 和 `CustomEase` 实现渐进增强的动效。依赖位于 `devDependencies`，静态构建会将运行时代码输出为独立资源，不要求部署环境执行 `npm install`。
 
-Fluent 缓动、时长和位移统一定义在两处：
+缓动、时长和位移统一定义在两处（强 ease-out 入场、加速出场、对称过渡）：
 
 - `docs/.vitepress/theme/motion/tokens.ts`：GSAP 使用的命名 ease 与数值 token。
 - `docs/.vitepress/theme/styles/tokens.css`：CSS transition 使用的同值变量。
 
 修改动效 token 时需同步更新这两个文件。`prefers-reduced-motion`、禁用 JavaScript 和动效资源加载失败都会回退为完整可见的静态页面。
+
+## 视觉系统
+
+站点为 dark tech 风格：深色是默认主题（`config.mts` 的 `appearance: 'dark'`），亮色为完整设计的日间变体，两个模式共用同一个电光青强调色与同一套圆角 token（卡片 12px、按钮 8px、小元素 6px，定义在 `tokens.css`）。
+
+首页 hero 由 `docs/.vitepress/theme/components/HomeHero.vue` 通过 `home-hero-before` 插槽渲染，默认 `.VPHero` 内容被 CSS 隐藏而不是被 fork；hero 文案仍来自两个 `index.md` 的 frontmatter。正文的 `data-scrub-words` 区块在滚动时逐字显现，`data-reveal` / `data-reveal-group` 为批量入场，相关选择器在 `motion.css`、`reveal.ts` 和 `config.mts` 的预渲染脚本中需要保持一致。
 
 ## 替换内容
 

@@ -1,6 +1,7 @@
 /* Pre-paint and runtime motion states. */
 
 html.anim [data-reveal],
+html.anim [data-scrub-words],
 html.anim .home-block > h2,
 html.anim [data-reveal-group] > *,
 html.anim .vp-doc > h2,
@@ -16,10 +17,10 @@ html.anim .vp-doc > div[class*="language-"] {
   will-change: opacity, transform;
 }
 
-html.anim .VPHero .name,
-html.anim .VPHero .text,
-html.anim .VPHero .tagline,
-html.anim .VPHero .actions,
+html.anim .home-hero__name,
+html.anim .home-hero__title,
+html.anim .home-hero__tagline,
+html.anim .home-hero__actions,
 html.anim .hero-visual {
   visibility: hidden;
   opacity: 0;
@@ -29,9 +30,10 @@ html.anim .hero-visual {
   overflow: hidden;
 }
 
-/* Fluent reveal uses one pointer sample to drive a wash and a border glint. */
+/* Pointer reveal uses one pointer sample to drive a wash and a border glint. */
 .capability-item,
 .VPButton,
+.home-hero__action,
 .docs-callout a,
 .VPSidebarItem .item,
 .VPNavBarMenuLink {
@@ -45,6 +47,8 @@ html.anim .hero-visual {
 .capability-item::after,
 .VPButton::before,
 .VPButton::after,
+.home-hero__action::before,
+.home-hero__action::after,
 .docs-callout a::before,
 .docs-callout a::after,
 .VPSidebarItem .item::before,
@@ -62,6 +66,7 @@ html.anim .hero-visual {
 
 .capability-item::before,
 .VPButton::before,
+.home-hero__action::before,
 .docs-callout a::before,
 .VPSidebarItem .item::before,
 .VPNavBarMenuLink::before {
@@ -75,6 +80,7 @@ html.anim .hero-visual {
 
 .capability-item::after,
 .VPButton::after,
+.home-hero__action::after,
 .docs-callout a::after,
 .VPSidebarItem .item::after,
 .VPNavBarMenuLink::after {
@@ -99,6 +105,10 @@ html.anim .hero-visual {
 .VPButton:hover::after,
 .VPButton:focus-visible::before,
 .VPButton:focus-visible::after,
+.home-hero__action:hover::before,
+.home-hero__action:hover::after,
+.home-hero__action:focus-visible::before,
+.home-hero__action:focus-visible::after,
 .docs-callout a:hover::before,
 .docs-callout a:hover::after,
 .docs-callout a:focus-visible::before,
@@ -119,11 +129,17 @@ html.anim .hero-visual {
     border-color var(--mo-dur-standard) var(--mo-ease-standard);
 }
 
-.capability-item:hover,
-.capability-item:focus-within {
-  border-color: color-mix(in srgb, var(--vp-c-brand-1) 35%, var(--vp-c-divider));
-  box-shadow: var(--mo-surface-shadow-lift);
-  transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+  .capability-item:hover,
+  .capability-item:focus-within {
+    border-color: color-mix(in srgb, var(--vp-c-brand-1) 35%, var(--vp-c-divider));
+    box-shadow: var(--mo-surface-shadow-lift);
+    transform: translateY(-2px);
+  }
+}
+
+.capability-item:active {
+  transform: scale(0.99);
 }
 
 @media (prefers-reduced-motion: reduce) {

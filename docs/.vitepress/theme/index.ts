@@ -4,6 +4,12 @@ import Layout from './Layout.vue'
 import ModeShowcase from './components/ModeShowcase.vue'
 import { loadGsap } from './motion/gsap'
 
+// Self-hosted variable fonts; they cover Latin glyphs only, CJK falls back to
+// the system stack (see --vp-font-family-base in tokens.css). The mono face is
+// used for numerals, labels and code.
+import '@fontsource-variable/outfit'
+import '@fontsource-variable/jetbrains-mono'
+
 // Import order is the cascade order: tokens, then chrome, then page styles,
 // then the motion states that have to win over all of them.
 import './styles/tokens.css'

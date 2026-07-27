@@ -27,9 +27,9 @@ hero:
 
 <!-- Replace this section with the background, intended audience, and core value of PredatorLite. -->
 
-<div class="overview-points" data-reveal-group>
-  <p class="overview-lead">Use a concise paragraph here to explain what PredatorLite is and who it is built for.</p>
-  <p class="overview-note">Add the most important distinction between this project and other options. Keep only decision-making information.</p>
+<div class="overview-points">
+  <p class="overview-lead" data-scrub-words>PredatorLite is a lightweight control center for Predator laptops. Operating modes, cooling, power, and lighting live in one window, replacing the heavy official suite.</p>
+  <p class="overview-note" data-reveal>It is built for users who want to switch modes quickly and keep an eye on temperatures and battery, without giving up system resources to a bloated background app.</p>
 </div>
 
 </section>
@@ -47,20 +47,20 @@ hero:
     quiet="Quiet"
     balanced="Balanced"
     performance="Performance"
-    caption="Illustrative only — not live device data."
+    caption="Illustrative only, not live device data."
     aria-label="Operating mode illustration"
   />
   <article class="capability-item">
     <h3>Cooling and performance</h3>
-    <p>Describe fan controls, temperature information, and performance-related capabilities.</p>
+    <p>Watch temperatures and fan speeds, and tune the fan strategy between quiet and maximum cooling.</p>
   </article>
   <article class="capability-item">
     <h3>Power management</h3>
-    <p>Cover charge limits, battery status, or other power-related features.</p>
+    <p>Set a charge limit to reduce long-term battery wear, and check battery status at a glance.</p>
   </article>
   <article class="capability-item">
     <h3>Lighting and display</h3>
-    <p>Introduce brightness, lighting, refresh rate, and graphics connection settings.</p>
+    <p>Adjust keyboard lighting, screen brightness, and refresh rate without leaving the app.</p>
   </article>
 </div>
 
@@ -75,19 +75,19 @@ hero:
 <div class="use-case-list" data-reveal-group>
   <article class="use-case" tabindex="0">
     <h3>Everyday use</h3>
-    <p>Describe how PredatorLite fits into regular work or entertainment.</p>
+    <p>Stay in quiet mode for office work and browsing, with fans low and no distracting noise.</p>
   </article>
   <article class="use-case" tabindex="0">
     <h3>Performance tuning</h3>
-    <p>Show the typical workflow for changing performance and cooling strategies.</p>
+    <p>Switch to performance mode before gaming or rendering, in one click and no settings maze.</p>
   </article>
   <article class="use-case" tabindex="0">
     <h3>Device status</h3>
-    <p>Explain the value of viewing temperatures, fan speeds, and battery information.</p>
+    <p>Check temperatures, fan speeds, and remaining battery on the go to see how the device is doing.</p>
   </article>
   <article class="use-case" tabindex="0">
     <h3>Personalization</h3>
-    <p>Describe the device experience that users can adjust and save.</p>
+    <p>Tune lighting and display settings for each scenario, saved so they persist across reboots.</p>
   </article>
 </div>
 
@@ -96,7 +96,7 @@ hero:
 <section class="docs-callout" data-reveal>
   <div>
     <h2>Start with the PredatorLite documentation</h2>
-    <p>Add installation requirements, configuration details, and common questions in the documentation area.</p>
+    <p>Installation requirements, configuration details, and common questions live in the docs. Setup takes a few minutes.</p>
   </div>
   <a href="./guide/">Open the docs</a>
 </section>

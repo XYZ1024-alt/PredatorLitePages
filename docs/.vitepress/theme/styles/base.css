@@ -5,8 +5,8 @@ html {
 }
 
 ::selection {
-  color: var(--vp-c-text-1);
-  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-bg);
+  background: var(--vp-c-brand-1);
 }
 
 .VPNavBar {
@@ -34,25 +34,37 @@ html {
 }
 
 .VPNavBar .logo {
-  border-radius: 4px;
+  border-radius: var(--mo-radius-small);
 }
 
+/*
+ * Buttons. Press feedback is a pure scale: the element heard you. Hover only
+ * on devices with a real pointer, so tapping never leaves a stuck hover state.
+ */
 .VPButton {
-  border-radius: 6px !important;
+  border-radius: var(--mo-radius-button) !important;
   letter-spacing: 0;
   transition:
-    background-color var(--mo-dur-micro) var(--mo-ease-standard),
-    border-color var(--mo-dur-micro) var(--mo-ease-standard),
-    transform var(--mo-dur-micro) var(--mo-ease-standard);
+    background-color var(--mo-dur-micro) var(--mo-ease-enter),
+    border-color var(--mo-dur-micro) var(--mo-ease-enter),
+    transform var(--mo-dur-micro) var(--mo-ease-enter);
 }
 
 .VPButton:active {
-  transform: translateY(1px) scale(0.98);
+  transform: scale(0.97);
 }
 
 .VPButton:focus-visible {
   outline: 2px solid var(--vp-c-brand-1);
   outline-offset: 3px;
+}
+
+/* Sidebar: the active item gets an accent leading edge instead of a tint. */
+.VPSidebarItem .item {
+  border-radius: var(--mo-radius-small);
+  transition:
+    background-color var(--mo-dur-micro) var(--mo-ease-enter),
+    color var(--mo-dur-micro) var(--mo-ease-enter);
 }
 
 .VPDocAsideOutline .outline-marker {
@@ -61,4 +73,33 @@ html {
     height var(--mo-dur-standard) var(--mo-ease-standard),
     background-color var(--mo-dur-standard) var(--mo-ease-standard),
     opacity var(--mo-dur-standard) var(--mo-ease-enter);
+}
+
+/* Doc links: accent underline slides in on hover, never on touch. */
+.vp-doc a {
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition:
+    background-size var(--mo-dur-standard) var(--mo-ease-enter),
+    color var(--mo-dur-micro) var(--mo-ease-enter);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .vp-doc a:hover {
+    background-size: 100% 1px;
+  }
+}
+
+/* The default theme tightens headings for Latin; on CJK pages the glyphs collide. */
+html:not(:lang(en)) .vp-doc :is(h1, h2, h3, h4) {
+  letter-spacing: 0;
+}
+
+/* Code blocks sit one level above the page surface. */
+.vp-doc div[class*='language-'] {
+  border-radius: var(--mo-radius-card);
+  border: 1px solid var(--vp-c-divider);
 }

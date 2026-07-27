@@ -8,7 +8,7 @@
  * Nothing here may run during SSR. `import.meta.env.SSR` short-circuits before
  * the import so the static build never evaluates GSAP in Node.
  */
-import { registerFluentEases } from './tokens'
+import { registerSiteEases } from './tokens'
 
 type GsapCore = typeof import('gsap')['gsap']
 type ScrollTriggerStatic = typeof import('gsap/ScrollTrigger')['ScrollTrigger']
@@ -49,7 +49,7 @@ export function loadGsap(): Promise<GsapBundle> | null {
       splitText.SplitText,
       customEase.CustomEase,
     )
-    registerFluentEases(customEase.CustomEase)
+    registerSiteEases(customEase.CustomEase)
 
     return {
       gsap,
