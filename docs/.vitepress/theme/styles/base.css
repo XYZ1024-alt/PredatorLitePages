@@ -1,0 +1,64 @@
+/* Site chrome that applies on every page. Home-only rules live in home.css. */
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  color: var(--vp-c-text-1);
+  background: var(--vp-c-brand-soft);
+}
+
+.VPNavBar {
+  --mo-nav-material: 0;
+  background-color: color-mix(
+    in srgb,
+    var(--vp-c-bg) calc(var(--mo-nav-material) * 92%),
+    transparent
+  ) !important;
+  -webkit-backdrop-filter: blur(calc(var(--mo-nav-material) * 20px))
+    saturate(calc(1 + var(--mo-nav-material) * 0.6));
+  backdrop-filter: blur(calc(var(--mo-nav-material) * 20px))
+    saturate(calc(1 + var(--mo-nav-material) * 0.6));
+}
+
+.VPNavBar .divider-line {
+  opacity: var(--mo-nav-material);
+  transition: opacity var(--mo-dur-standard) var(--mo-ease-standard);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .VPNavBar {
+    background-color: var(--vp-c-bg) !important;
+  }
+}
+
+.VPNavBar .logo {
+  border-radius: 4px;
+}
+
+.VPButton {
+  border-radius: 6px !important;
+  letter-spacing: 0;
+  transition:
+    background-color var(--mo-dur-micro) var(--mo-ease-standard),
+    border-color var(--mo-dur-micro) var(--mo-ease-standard),
+    transform var(--mo-dur-micro) var(--mo-ease-standard);
+}
+
+.VPButton:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.VPButton:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 3px;
+}
+
+.VPDocAsideOutline .outline-marker {
+  transition:
+    top var(--mo-dur-standard) var(--mo-ease-standard),
+    height var(--mo-dur-standard) var(--mo-ease-standard),
+    background-color var(--mo-dur-standard) var(--mo-ease-standard),
+    opacity var(--mo-dur-standard) var(--mo-ease-enter);
+}

@@ -5,6 +5,28 @@ import { ogImage, projectLinks, siteUrl } from './site'
 const LOGO = '/img/logo.png'
 
 /**
+ * Runs synchronously in `<head>`, before the body paints.
+ *
+ * Marks the document as animating, but only when scripting is available *and*
+ * the visitor has not asked for reduced motion — the two conditions under which
+ * an animation will actually run. `styles/motion.css` hides reveal targets under
+ * that class only, so with scripting off or reduced motion on, the page renders
+ * fully visible and there is nothing to undo.
+ *
+ * Hiding before the first paint is what keeps the hero from painting and then
+ * snapping back to hidden once GSAP arrives, which reads as a glitch rather than
+ * as loading.
+ *
+ * The timer fails open. If the GSAP chunk never arrives the handoff in
+ * `usePageMotion` never happens, and without this the content would stay hidden
+ * for good — unacceptable on a documentation site. That controller clears the
+ * timer when it takes over, and stands down if the timer won the race.
+ */
+const PRE_PAINT_SCRIPT = `try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){\
+var h=document.documentElement;h.classList.add('anim');\
+window.__moFailsafe=setTimeout(function(){h.classList.remove('anim')},700)}}catch(e){}`
+
+/**
  * Splits text into search tokens, adding word segmentation for CJK scripts.
  *
  * MiniSearch only splits on whitespace and punctuation, which turns a whole
@@ -155,9 +177,13 @@ export default defineConfig({
   head: [
     ['link', { rel: 'icon', type: 'image/png', href: LOGO }],
     ['meta', { name: 'theme-color', content: '#087eae' }],
+    ['script', {}, PRE_PAINT_SCRIPT],
   ],
   markdown: {
     lineNumbers: true,
+  },
+  vite: {
+    ssr: { noExternal: ['gsap'] },
   },
   locales: {
     root: {

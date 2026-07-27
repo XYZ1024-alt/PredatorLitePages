@@ -1,0 +1,152 @@
+/* Pre-paint and runtime motion states. */
+
+html.anim [data-reveal],
+html.anim .home-block > h2,
+html.anim [data-reveal-group] > *,
+html.anim .vp-doc > h2,
+html.anim .vp-doc > h3,
+html.anim .vp-doc > p,
+html.anim .vp-doc > ul,
+html.anim .vp-doc > ol,
+html.anim .vp-doc > table,
+html.anim .vp-doc > .custom-block,
+html.anim .vp-doc > .vp-code-group,
+html.anim .vp-doc > div[class*="language-"] {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+html.anim .VPHero .name,
+html.anim .VPHero .text,
+html.anim .VPHero .tagline,
+html.anim .VPHero .actions,
+html.anim .hero-visual {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.hero-line {
+  overflow: hidden;
+}
+
+/* Fluent reveal uses one pointer sample to drive a wash and a border glint. */
+.capability-item,
+.VPButton,
+.docs-callout a,
+.VPSidebarItem .item,
+.VPNavBarMenuLink {
+  --mx: 50%;
+  --my: 50%;
+  position: relative;
+  isolation: isolate;
+}
+
+.capability-item::before,
+.capability-item::after,
+.VPButton::before,
+.VPButton::after,
+.docs-callout a::before,
+.docs-callout a::after,
+.VPSidebarItem .item::before,
+.VPSidebarItem .item::after,
+.VPNavBarMenuLink::before,
+.VPNavBarMenuLink::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--mo-dur-micro) var(--mo-ease-enter);
+}
+
+.capability-item::before,
+.VPButton::before,
+.docs-callout a::before,
+.VPSidebarItem .item::before,
+.VPNavBarMenuLink::before {
+  z-index: 0;
+  background: radial-gradient(
+    circle 150px at var(--mx) var(--my),
+    color-mix(in srgb, var(--vp-c-brand-1) 12%, transparent),
+    transparent 72%
+  );
+}
+
+.capability-item::after,
+.VPButton::after,
+.docs-callout a::after,
+.VPSidebarItem .item::after,
+.VPNavBarMenuLink::after {
+  z-index: 2;
+  padding: 1px;
+  background: radial-gradient(
+    circle 92px at var(--mx) var(--my),
+    color-mix(in srgb, var(--vp-c-brand-1) calc(22% * var(--mo-reveal-strength)), transparent),
+    transparent 74%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.capability-item:hover::before,
+.capability-item:hover::after,
+.capability-item:focus-within::before,
+.capability-item:focus-within::after,
+.VPButton:hover::before,
+.VPButton:hover::after,
+.VPButton:focus-visible::before,
+.VPButton:focus-visible::after,
+.docs-callout a:hover::before,
+.docs-callout a:hover::after,
+.docs-callout a:focus-visible::before,
+.docs-callout a:focus-visible::after,
+.VPSidebarItem .item:hover::before,
+.VPSidebarItem .item:hover::after,
+.VPNavBarMenuLink:hover::before,
+.VPNavBarMenuLink:hover::after,
+.VPNavBarMenuLink:focus-visible::before,
+.VPNavBarMenuLink:focus-visible::after {
+  opacity: 1;
+}
+
+.capability-item {
+  transition:
+    transform var(--mo-dur-standard) var(--mo-ease-standard),
+    box-shadow var(--mo-dur-standard) var(--mo-ease-standard),
+    border-color var(--mo-dur-standard) var(--mo-ease-standard);
+}
+
+.capability-item:hover,
+.capability-item:focus-within {
+  border-color: color-mix(in srgb, var(--vp-c-brand-1) 35%, var(--vp-c-divider));
+  box-shadow: var(--mo-surface-shadow-lift);
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ambient-aurora,
+  .hero-visual,
+  .capability-item,
+  .use-case,
+  .VPButton,
+  .docs-callout a,
+  .scroll-progress,
+  .mode-showcase * {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .capability-item:hover,
+  .capability-item:focus-within,
+  .use-case:hover,
+  .use-case:focus-visible {
+    transform: none;
+  }
+}
