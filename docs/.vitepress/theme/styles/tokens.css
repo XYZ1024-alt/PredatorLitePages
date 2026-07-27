@@ -1,0 +1,87 @@
+/*
+ * Design tokens: color, type, layout, motion.
+ *
+ * The motion block mirrors `theme/motion/tokens.ts`, which registers the same
+ * curves as named GSAP eases. CSS transitions and GSAP tweens therefore run on
+ * identical curves — that is what makes the two kinds of animation read as one
+ * system. Edit the two files together; nothing syncs them at build time.
+ */
+
+:root {
+  --vp-font-family-base: "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+  --vp-font-family-mono: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+  --vp-c-brand-1: #087eae;
+  --vp-c-brand-2: #0a6f99;
+  --vp-c-brand-3: #075d81;
+  --vp-c-brand-soft: rgb(8 126 174 / 12%);
+  --vp-c-bg: #f7f8fa;
+  --vp-c-bg-alt: #eef1f4;
+  --vp-c-bg-elv: #ffffff;
+  --vp-c-bg-soft: #edf2f5;
+  --vp-c-divider: #d7dde2;
+  --vp-c-gutter: #e6eaee;
+  --vp-c-text-1: #192126;
+  --vp-c-text-2: #53616a;
+  --vp-c-text-3: #75838c;
+  --vp-button-brand-text: #f7fbfd;
+  --vp-button-brand-bg: #087eae;
+  --vp-button-brand-hover-bg: #096f99;
+  --vp-button-brand-active-bg: #075d81;
+  --vp-button-alt-text: #27343b;
+  --vp-button-alt-bg: #e3e8ec;
+  --vp-button-alt-hover-bg: #d7dee3;
+  --vp-home-hero-name-color: #087eae;
+  --vp-layout-max-width: 1440px;
+
+  /* Fluent easing curves. Decelerate in, accelerate out, symmetric between. */
+  --mo-ease-enter: cubic-bezier(0.1, 0.9, 0.2, 1);
+  --mo-ease-exit: cubic-bezier(0.7, 0, 1, 0.5);
+  --mo-ease-standard: cubic-bezier(0.8, 0, 0.2, 1);
+
+  --mo-dur-micro: 150ms;
+  --mo-dur-standard: 250ms;
+  --mo-dur-enter: 300ms;
+  --mo-dur-reveal: 400ms;
+
+  /* Capped on purpose: long travel is what makes motion look cheap. */
+  --mo-travel-micro: 8px;
+  --mo-travel-standard: 16px;
+  --mo-travel-hero: 24px;
+
+  /* Ambient brand glow. Barely there in light, since the canvas is near-white. */
+  --mo-aurora-opacity: 0.055;
+  --mo-surface-shadow: 0 1px 2px rgb(25 33 38 / 6%), 0 8px 24px rgb(25 33 38 / 6%);
+  --mo-surface-shadow-lift: 0 2px 4px rgb(25 33 38 / 8%), 0 16px 40px rgb(25 33 38 / 10%);
+  /* Fluent's reveal highlight: a pointer-tracked wash over the surface. */
+  --mo-reveal-strength: 0.5;
+}
+
+.dark {
+  --vp-c-brand-1: #48c5f4;
+  --vp-c-brand-2: #28addf;
+  --vp-c-brand-3: #178fbd;
+  --vp-c-brand-soft: rgb(72 197 244 / 14%);
+  --vp-c-bg: #15191c;
+  --vp-c-bg-alt: #101315;
+  --vp-c-bg-elv: #1e2428;
+  --vp-c-bg-soft: #20272b;
+  --vp-c-divider: #323b40;
+  --vp-c-gutter: #252c30;
+  --vp-c-text-1: #edf4f7;
+  --vp-c-text-2: #b2c0c7;
+  --vp-c-text-3: #85959d;
+  --vp-button-brand-text: #102026;
+  --vp-button-brand-bg: #48c5f4;
+  --vp-button-brand-hover-bg: #67d0f7;
+  --vp-button-brand-active-bg: #28addf;
+  --vp-button-alt-text: #e8eff2;
+  --vp-button-alt-bg: #293136;
+  --vp-button-alt-hover-bg: #343e44;
+  --vp-home-hero-name-color: #48c5f4;
+
+  /* Dark surfaces absorb the glow, so it needs roughly double the alpha. */
+  --mo-aurora-opacity: 0.12;
+  --mo-surface-shadow: 0 1px 2px rgb(0 0 0 / 30%), 0 8px 24px rgb(0 0 0 / 24%);
+  --mo-surface-shadow-lift: 0 2px 4px rgb(0 0 0 / 36%), 0 16px 40px rgb(0 0 0 / 34%);
+  --mo-reveal-strength: 0.9;
+}

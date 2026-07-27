@@ -24,10 +24,12 @@ npm run preview
 - `docs/en/index.md`：英文首页，对应 `/en/`
 - `docs/guide/`：中文文档
 - `docs/en/guide/`：英文文档
-- `docs/.vitepress/i18n.ts`：**全部界面文案**（导航、侧栏、按钮、404、搜索框）
+- `docs/.vitepress/i18n.ts`：站点 chrome 文案（导航、侧栏、按钮、404、搜索框）
 - `docs/.vitepress/config.mts`：站点结构、搜索分词、SEO 元信息
 - `docs/.vitepress/site.ts`：站点域名、对外链接、分享图
-- `docs/.vitepress/theme/custom.css`：站点视觉样式
+- `docs/.vitepress/theme/`：主题入口、Layout 和自定义组件
+- `docs/.vitepress/theme/styles/`：设计 token、站点基础样式、首页样式和动效状态
+- `docs/.vitepress/theme/motion/`：GSAP 加载器、Fluent 动效 token 与页面控制器
 - `docs/public/img/`：logo 和软件截图
 - `docs/public/_headers`、`docs/public/robots.txt`：Cloudflare 响应头与爬虫规则
 
@@ -35,13 +37,24 @@ npm run preview
 
 ## 站点配置
 
-界面文案集中在 `docs/.vitepress/i18n.ts`，每种语言一个 `LocaleUI` 对象。改文案只动这里；新增一门语言需要加一个 `LocaleUI` 对象，并在 `config.mts` 的 `locales` 中登记。
+站点 chrome 文案集中在 `docs/.vitepress/i18n.ts`，每种语言一个 `LocaleUI` 对象。首页正文和 `ModeShowcase` 文案保留在对应语言的 `index.md` 中；新增一门语言时需要同时补首页内容，并在 `config.mts` 的 `locales` 中登记。
 
 `docs/.vitepress/site.ts` 存放站点级常量：
 
 - `siteUrl`：部署域名。sitemap、canonical、`hreflang` 和 `og:url` 都基于它生成，换自定义域名时改这一处。
 - `projectLinks`：GitHub、下载、问题反馈地址。**留空的链接会自动从导航中隐藏**，不必删除条目。
 - `ogImage`：社交分享图，建议 1200×630。留空时不输出 `og:image`。
+
+## 动效系统
+
+站点使用 `gsap`、`ScrollTrigger`、`SplitText` 和 `CustomEase` 实现渐进增强的动效。依赖位于 `devDependencies`，静态构建会将运行时代码输出为独立资源，不要求部署环境执行 `npm install`。
+
+Fluent 缓动、时长和位移统一定义在两处：
+
+- `docs/.vitepress/theme/motion/tokens.ts`：GSAP 使用的命名 ease 与数值 token。
+- `docs/.vitepress/theme/styles/tokens.css`：CSS transition 使用的同值变量。
+
+修改动效 token 时需同步更新这两个文件。`prefers-reduced-motion`、禁用 JavaScript 和动效资源加载失败都会回退为完整可见的静态页面。
 
 ## 替换内容
 

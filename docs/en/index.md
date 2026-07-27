@@ -27,7 +27,7 @@ hero:
 
 <!-- Replace this section with the background, intended audience, and core value of PredatorLite. -->
 
-<div class="overview-points">
+<div class="overview-points" data-reveal-group>
   <p class="overview-lead">Use a concise paragraph here to explain what PredatorLite is and who it is built for.</p>
   <p class="overview-note">Add the most important distinction between this project and other options. Keep only decision-making information.</p>
 </div>
@@ -40,11 +40,16 @@ hero:
 
 <!-- Replace these items with verified features. Keep the three to five capabilities that matter most. -->
 
-<div class="capability-grid">
-  <article class="capability-item">
-    <h3>Operating modes</h3>
-    <p>Explain the available modes, how switching works, and the practical value for daily use.</p>
-  </article>
+<div class="capability-grid" data-reveal-group>
+  <ModeShowcase
+    title="Operating modes"
+    description="Switch between quiet, balanced, and performance modes to see the illustrative rhythm change."
+    quiet="Quiet"
+    balanced="Balanced"
+    performance="Performance"
+    caption="Illustrative only — not live device data."
+    aria-label="Operating mode illustration"
+  />
   <article class="capability-item">
     <h3>Cooling and performance</h3>
     <p>Describe fan controls, temperature information, and performance-related capabilities.</p>
@@ -67,20 +72,20 @@ hero:
 
 <!-- Replace these examples with real scenarios and avoid claims that cannot be verified. -->
 
-<div class="use-case-list">
-  <article class="use-case">
+<div class="use-case-list" data-reveal-group>
+  <article class="use-case" tabindex="0">
     <h3>Everyday use</h3>
     <p>Describe how PredatorLite fits into regular work or entertainment.</p>
   </article>
-  <article class="use-case">
+  <article class="use-case" tabindex="0">
     <h3>Performance tuning</h3>
     <p>Show the typical workflow for changing performance and cooling strategies.</p>
   </article>
-  <article class="use-case">
+  <article class="use-case" tabindex="0">
     <h3>Device status</h3>
     <p>Explain the value of viewing temperatures, fan speeds, and battery information.</p>
   </article>
-  <article class="use-case">
+  <article class="use-case" tabindex="0">
     <h3>Personalization</h3>
     <p>Describe the device experience that users can adjust and save.</p>
   </article>
@@ -88,12 +93,12 @@ hero:
 
 </section>
 
-<section class="docs-callout">
+<section class="docs-callout" data-reveal>
   <div>
     <h2>Start with the PredatorLite documentation</h2>
     <p>Add installation requirements, configuration details, and common questions in the documentation area.</p>
   </div>
-  <a href="/en/guide/">Open the docs</a>
+  <a href="./guide/">Open the docs</a>
 </section>
 
 </div>
