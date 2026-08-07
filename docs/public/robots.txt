@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://predatorlite.pages.dev/sitemap.xml

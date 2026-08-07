@@ -1,0 +1,107 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
+import HomeHero from '../../components/HomeHero.vue'
+import ManifestoReveal from '../../components/ManifestoReveal.vue'
+import HorizontalGallery from '../../components/HorizontalGallery.vue'
+import TelemetryStrip from '../../components/TelemetryStrip.vue'
+import CapabilityMarquee from '../../components/CapabilityMarquee.vue'
+
+const hero = {
+  eyebrow: 'A lightweight control center for Predator devices',
+  titleLead: 'Predator',
+  titleAccent: 'Lite',
+  text: 'Modes, cooling, power, lighting, and display in one window.',
+  actions: [
+    { theme: 'brand', text: 'Read the docs', link: '/en/guide/' },
+    { theme: 'alt', text: 'Explore features', link: '#capabilities' },
+  ],
+  modesLabel: 'Operating mode',
+  modes: [
+    { id: 'quiet', label: 'Quiet', note: 'Fans stay slow and noise stays low.' },
+    { id: 'balanced', label: 'Balanced', note: 'An automatic trade-off between heat and noise.' },
+    { id: 'performance', label: 'Performance', note: 'Higher power limits, performance first.' },
+    { id: 'turbo', label: 'Turbo', note: 'Fans and power fully open for short bursts.' },
+  ],
+}
+
+const manifestoLines = [
+  [{ t: 'No' }, { t: 'jumping' }, { t: 'between' }, { t: 'background' }, { t: 'processes.' }],
+  [{ t: 'No' }, { t: 'digging' }, { t: 'through' }, { t: 'system' }, { t: 'settings.' }],
+  [{ t: 'Device' }, { t: 'status' }, { t: 'and' }, { t: 'everyday' }, { t: 'controls,' }],
+  [{ t: 'in' }, { t: 'one' }, { t: 'place.', accent: true }],
+]
+
+const galleryPanels = [
+  { title: 'Switch operating modes', body: 'Quiet, balanced, performance, and turbo sit in one row, with the selected state immediately visible.', image: '/img/screens/main.svg', alt: 'PredatorLite main window' },
+  { title: 'Set the cooling strategy', body: 'Review temperatures and fan speeds, then choose automatic, full-speed, or a custom fan curve.', image: '/img/screens/cooling.svg', alt: 'PredatorLite cooling settings' },
+  { title: 'Tune keyboard lighting', body: 'Set keyboard zones, logo color, brightness, and lighting effects independently.', image: '/img/screens/lighting.svg', alt: 'PredatorLite lighting settings' },
+  { title: 'Monitor hardware status', body: 'Review CPU, GPU, memory, battery, refresh rate, and the current operating mode together.', image: '/img/screens/monitoring.svg', alt: 'PredatorLite hardware monitoring' },
+  { title: 'Manage app behavior', body: 'Change language, startup, tray behavior, power-saving options, and global quick actions.', image: '/img/screens/settings.svg', alt: 'PredatorLite app settings' },
+]
+
+const telemetryItems = [
+  { label: 'GPU temperature', value: 62, unit: '°C', note: 'Temperature and fan speed side by side' },
+  { label: 'Fan speed', value: 2350, unit: 'RPM', note: 'Automatic, full-speed, or custom curve' },
+  { label: 'Refresh rate', value: 165, unit: 'Hz', note: 'Adjustable with GPU connection mode' },
+  { label: 'Battery drain', value: 87, unit: 'W', note: 'Adapter status and charge limit visible' },
+]
+
+const capabilities = ['Operating modes', 'Cooling', 'Fans', 'Temperature', 'Power', 'Lighting', 'Display', 'Refresh rate']
+---
+
+<StarlightPage frontmatter={{
+  title: 'PredatorLite',
+  description: 'PredatorLite project overview and documentation',
+  template: 'splash',
+  prev: false,
+  next: false,
+}}>
+  <div class="showcase-root">
+    <HomeHero
+      client:load
+      eyebrow={hero.eyebrow}
+      titleLead={hero.titleLead}
+      titleAccent={hero.titleAccent}
+      text={hero.text}
+      actions={hero.actions}
+      modesLabel={hero.modesLabel}
+      modes={hero.modes}
+    />
+
+    <ManifestoReveal client:visible lines={manifestoLines} />
+
+    <HorizontalGallery
+      client:visible
+      title="See the device, then adjust"
+      description="The real interface keeps information and controls together, so every adjustment has clear context."
+      panels={galleryPanels}
+    />
+
+    <TelemetryStrip
+      client:visible
+      items={telemetryItems}
+      caption="Sample readings. Actual values depend on the device."
+    />
+
+    <CapabilityMarquee
+      client:visible
+      ariaLabel="PredatorLite capability range"
+      pauseLabel="Pause the capability marquee"
+      playLabel="Resume the capability marquee"
+      items={[...capabilities]}
+    />
+
+    <section class="sc-final">
+      <div class="sc-final__glow" aria-hidden="true"></div>
+      <div class="sc-final__inner sc-shell">
+        <h2 class="sc-final__title">Start with the <em>docs</em>.</h2>
+        <div class="sc-final__side">
+          <p class="sc-final__text">Install requirements, configuration, and FAQ live in the documentation.</p>
+          <div class="sc-final__actions">
+            <a class="sc-button" href="/en/guide/">Read the docs</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</StarlightPage>

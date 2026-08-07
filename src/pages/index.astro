@@ -1,0 +1,107 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
+import HomeHero from '../components/HomeHero.vue'
+import ManifestoReveal from '../components/ManifestoReveal.vue'
+import HorizontalGallery from '../components/HorizontalGallery.vue'
+import TelemetryStrip from '../components/TelemetryStrip.vue'
+import CapabilityMarquee from '../components/CapabilityMarquee.vue'
+
+const hero = {
+  eyebrow: '轻量的 Predator 设备控制中心',
+  titleLead: 'Predator',
+  titleAccent: 'Lite',
+  text: '在一个窗口里管理模式、散热、电源、灯光与显示。',
+  actions: [
+    { theme: 'brand', text: '查看文档', link: '/guide/' },
+    { theme: 'alt', text: '了解功能', link: '#capabilities' },
+  ],
+  modesLabel: '运行模式',
+  modes: [
+    { id: 'quiet', label: '安静', note: '风扇低速运转，把噪声压到最低。' },
+    { id: 'balanced', label: '均衡', note: '在温度与噪声之间自动取得平衡。' },
+    { id: 'performance', label: '性能', note: '提高功耗上限，优先释放性能。' },
+    { id: 'turbo', label: '极速', note: '风扇与功耗全开，面向短时高负载。' },
+  ],
+}
+
+const manifestoLines = [
+  [{ t: '不用在' }, { t: '后台进程' }, { t: '之间' }, { t: '来回切换。' }],
+  [{ t: '不用翻找' }, { t: '层层' }, { t: '系统设置。' }],
+  [{ t: '设备状态' }, { t: '与' }, { t: '常用调整，' }],
+  [{ t: '都在' }, { t: '同一处。', accent: true }],
+]
+
+const galleryPanels = [
+  { title: '切换运行模式', body: '安静、均衡、性能和极速模式放在同一排，选择结果立即可见。', image: '/img/screens/main.svg', alt: 'PredatorLite 主界面' },
+  { title: '设置散热策略', body: '查看温度与风扇转速，在自动、全速和自定义风扇曲线之间按需调整。', image: '/img/screens/cooling.svg', alt: 'PredatorLite 散热设置界面' },
+  { title: '调整键盘灯光', body: '分别设置键盘区域、标志灯颜色、亮度和灯光效果。', image: '/img/screens/lighting.svg', alt: 'PredatorLite 灯光设置界面' },
+  { title: '监控硬件状态', body: '集中查看 CPU、GPU、内存、电量、刷新率和当前运行模式。', image: '/img/screens/monitoring.svg', alt: 'PredatorLite 硬件监控界面' },
+  { title: '管理应用行为', body: '切换语言、开机启动、托盘行为、节能选项和全局快捷操作。', image: '/img/screens/settings.svg', alt: 'PredatorLite 应用设置界面' },
+]
+
+const telemetryItems = [
+  { label: 'GPU 温度', value: 62, unit: '°C', note: '温度与风扇转速同屏显示' },
+  { label: '风扇转速', value: 2350, unit: 'RPM', note: '自动、全速或自定义曲线' },
+  { label: '屏幕刷新率', value: 165, unit: 'Hz', note: '刷新率与显卡连接方式可调' },
+  { label: '电池功耗', value: 87, unit: 'W', note: '供电状态与充电上限可见' },
+]
+
+const capabilities = ['运行模式', '散热', '风扇', '温度', '电源', '灯光', '显示', '刷新率']
+---
+
+<StarlightPage frontmatter={{
+  title: 'PredatorLite',
+  description: 'PredatorLite 项目介绍与使用文档',
+  template: 'splash',
+  prev: false,
+  next: false,
+}}>
+  <div class="showcase-root">
+    <HomeHero
+      client:load
+      eyebrow={hero.eyebrow}
+      titleLead={hero.titleLead}
+      titleAccent={hero.titleAccent}
+      text={hero.text}
+      actions={hero.actions}
+      modesLabel={hero.modesLabel}
+      modes={hero.modes}
+    />
+
+    <ManifestoReveal client:visible lines={manifestoLines} />
+
+    <HorizontalGallery
+      client:visible
+      title="看清设备，再做调整"
+      description="真实界面让信息与控制保持紧邻，每次调整都有明确上下文。"
+      panels={galleryPanels}
+    />
+
+    <TelemetryStrip
+      client:visible
+      items={telemetryItems}
+      caption="示例读数，实际数值随设备变化"
+    />
+
+    <CapabilityMarquee
+      client:visible
+      ariaLabel="PredatorLite 功能范围"
+      pauseLabel="暂停功能滚动"
+      playLabel="继续功能滚动"
+      items={[...capabilities]}
+    />
+
+    <section class="sc-final">
+      <div class="sc-final__glow" aria-hidden="true"></div>
+      <div class="sc-final__inner sc-shell">
+        <h2 class="sc-final__title">从<em>文档</em>开始。</h2>
+        <div class="sc-final__side">
+          <p class="sc-final__text">安装要求、配置说明和常见问题都整理在文档区。</p>
+          <div class="sc-final__actions">
+            <a class="sc-button" href="/guide/">查看文档</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</StarlightPage>
